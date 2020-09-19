@@ -31,7 +31,7 @@ components in MVC views, so I could scrap the old one and use the blazor nav eve
 ## As long as you aren't working at uber-scale, you don't need to be too concerned about scalability ##
 First off: one server with 3 gigs of RAM has been shown to handle 5000 concurrent connections. Each user takes about ~273 KB, depending on the size of your state (https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/server?view=aspnetcore-3.1). To me, that means this is usable for 90% of the sites in the world. 
 
-If you are highly likely to operate at uber-scale, this is probably not the technology for you. But if you live in that world, you should already know that most of those projects use open source stacks because they are so much cheaper at the highest level of scale.
+If you are highly likely to operate at uber-scale, this is probably not the technology for you. But if you live in that world, you already know that most of those projects use open source stacks because they are so much cheaper at the highest level of scale. And you probably have a large team of co-workers who thinks about nothing but scale.
 
 Also, there are interesting options for pushing Blazor Server even further. Azure has SignalR Server, which can hold all your websocket connections for you, decreasing the per-user server load significantly. 
 
