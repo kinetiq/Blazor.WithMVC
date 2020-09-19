@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/Blazor"
 @namespace Demo.Web.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -11,12 +11,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blazor Demo</title>
-    <base href="~/" />
+
+    @* This tells Blazor that our app is running relative to /Blazor/ *@
+    <base href="~/Blazor/" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    
-    @* Used the existing site.css that came out of the box with the MVC app. I added a very few
-        blazor-specific styles to it, at the end. *@
-    <link href="css/site.css" rel="stylesheet" />
+
+    @* Added a / at the start here. The <base> tag above would otherwise cause us to look
+        under /Blazor/css/site.css, and that isn't where the file is. *@
+    <link href="/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <app>
@@ -34,6 +36,9 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+    @* The ~/ (absolute path) is important. This script is still found at the root of our site,
+        but if you don't add ~/, the browser will look under /Blazor/ because of the change we made
+        to the <base> element above. *@
+    <script src="~/_framework/blazor.server.js"></script>
 </body>
 </html>

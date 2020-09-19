@@ -54,14 +54,17 @@ namespace Demo.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                // Adds the hub, which is how Blazor components connect to the server via SignalR. 
-                endpoints.MapBlazorHub(); 
-
-                // Creates a low-priority route to the _Host file. In effect, all traffic that isn't explicitly routed
-                // elsewhere will go to _Host, where Blazor's internal routing will take over. This means your existing
-                // MVC routes will continue to work, *except* the default Route, which is a problem and we will work
-                // around that in the next commit.
-                endpoints.MapFallbackToPage("/_Host");
+                // Normally, you would have .MapBlazorHub() and /MapFallbackToPage("/_Host") here.
+                //
+                // The change below puts your Blazor content under /Blazor (YourSite.com/Blazor/SomePage). This serves a few purposes:
+                //  - Eliminates the possibility of conflicts with existing MVC routes.
+                //  - Ordinarily, Blazor takes over the default route (YourSite.com with no path) which can be problematic.
+                //    Our goal is to avoid interfering with existing MVC behavior.
+                // 
+                // Some day, if the entire MVC app is ever completely re-worked in Blazor, you could change this
+                // back to the typical settings, tweak a few other minor changes in _Host that support this, and perhaps have a party.
+                endpoints.MapBlazorHub("/Blazor/_blazor"); 
+                endpoints.MapFallbackToPage("~/Blazor/{*clientroutes:nonfile}", "/Blazor/_Host");
             });
         }
     }
