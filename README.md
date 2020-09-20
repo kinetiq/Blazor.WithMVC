@@ -4,15 +4,18 @@ This repo starts with an out-of-the-box MVC Core app and walks you through integ
 I did this in a large production system and it is working nicely. They co-exist beautifully... This was the easiest migration to a next gen technology I've ever experienced.
 
 # What do I need to know?
-Make sure you check out the commit notes. In the first commit, I bring in an out-of-the-box MVC Core site. In the next commit (Step 1), I get Blazor working bare-bones.
-After that, in the next commit (Step 2), I show a configuration I prefer where Blazor runs under YourSite.com/Blazor/, which prevents routing conflicts and is as minimally
-invasive as possible. Importantly, allows MVC to continue handling the default route - normally Blazor takes over the default route and I wanted my MVC app to keep handling that.
-If that doesn't matter to you, you might want to stop at Step 1. It will work fine.
+Make sure you take a close look at the first few commit notes. Here's a rundown:
+
+ - In the [first commit](https://github.com/kinetiq/Blazor.WithMVC/tree/c6f48a1cd39f569cfee04a8aa2427a719d73b7b6), I bring in an out-of-the-box MVC Core site. 
+ - In the [second commit (Step 1)](https://github.com/kinetiq/Blazor.WithMVC/tree/bba2a4f324d0c6153914072de3d43eea22b52d0f), I get Blazor working.
+ - After that, in the [third commit (Step 2)](https://github.com/kinetiq/Blazor.WithMVC/tree/392e3ed9788d4abce06cd06fa15bedbf29e28929), I show a configuration I prefer where Blazor runs under YourSite.com/Blazor/, which prevents routing conflicts and is even less invasive than usual. This setup allows MVC to continue handling the default route - normally Blazor takes over the default route, and I wanted my MVC app to keep handling that.
+
+You might be fine with Step 1. For me, I wanted to make absolutely sure my Blazor components were isolated and I didn't want to re-work my default page, so I needed Step 2.
 
 # Why Blazor Server and not Blazor Client / WASM?
 When working with an existing MVC app, Blazor Server is the clear choice. The migration is easy and you can leverage existing stlyes and code. WASM is also an amazing technology, 
 but since Blazor Client runs in the browser, it is a fundamentally different paradigm. The server needs to provide an API for data access. Some projects may have that, but for 
-most of us, that's a lot more disruptive than what I've outlined here.
+most of us, creating an API is a lot more disruptive than what I've outlined here.
 
 # What else can I expect once I have this working? #
 ## Data access might need some tweaking ##
